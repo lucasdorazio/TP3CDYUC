@@ -10,8 +10,8 @@
 /************************************************************************/
 
 extern volatile int fin_comando, comando_invalido;
-extern char RX_Buffer[6];
-extern int TX_Buffer[117];
+extern char RX_Buffer[BUFFER_LENGTH];
+extern char TX_Buffer[117];
 
 
 /************************************************************************/

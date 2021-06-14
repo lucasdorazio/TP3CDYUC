@@ -56,19 +56,19 @@ void Comunicacion_Recibir_comando(){
 	if (strcmp(RX_Buffer,"RST") == 0)					//INGRESÓ COMANDO RST
 	{
 		Comunicacion_Enviar_mensaje(msgMENU);
-		Generador_RST();
+		SIGNALGENERATOR_RST();
 	}
 	else{
 		if (strcmp(RX_Buffer,"ON") == 0)				//INGRESÓ COMANDO ON
 		{
 			Comunicacion_Enviar_mensaje(msgON);
-			Generador_ON();
+			SIGNALGENERATOR_ON();
 		}
 		else{
 			if (strcmp(RX_Buffer,"OFF") == 0)			//INGRESÓ COMANDO OFF
 			{
 				Comunicacion_Enviar_mensaje(msgOFF);
-				Generador_OFF();
+				SIGNALGENERATOR_OFF();
 			}
 			else{
 				decod_index=0;				
@@ -86,7 +86,7 @@ void Comunicacion_Recibir_comando(){
 					num=atoi(RX_Buffer);
 					if (num>=F_MIN && num<=F_MAX){		//INGRESÓ COMANDO FRECUENCIA VALIDA
 						Comunicacion_Enviar_mensaje(msgFREC);
-						Generador_New_f(num);
+						SIGNALGENERATOR_ChangeFrec(num);
 					}
 					else{
 						comando_invalido=1;

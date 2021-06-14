@@ -16,6 +16,8 @@
 
 #include "SerialPort.h"
 #include "Comunicacion.h"
+#include "SignalGenerator.h"
+#include "Timer.h"
 
 //DEFINICIÓN DE CONSTANTES
 #define BR9600 103				//Velocidad de transmisión 9600bps para cpu 16MHz

@@ -19,6 +19,8 @@ int main(void)
 {	
 	Comunicacion_Inicializar(BR9600);					
 	Comunicacion_Enviar_mensaje(msgBienvenida);
+	SIGNALGENERATOR_Init();
+	
 	while (1) 
     {	
 		//TAREAS DE BACKGROUND
