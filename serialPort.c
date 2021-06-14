@@ -10,7 +10,7 @@
 /************************************************************************/
 
 extern volatile int fin_comando, comando_invalido;
-extern char RX_Buffer[BUFFER_LENGTH];
+extern char RX_Buffer[RX_BUFFER_LENGTH];
 extern char TX_Buffer[117];
 
 
@@ -84,7 +84,7 @@ ISR(USART_RX_vect){
 		}
 		RX_index=0;
 		} else {
-		if (RX_index<BUFFER_LENGTH){		
+		if (RX_index<RX_BUFFER_LENGTH){		
 			RX_Buffer[RX_index++] =  dato;
 		}
 		else{								

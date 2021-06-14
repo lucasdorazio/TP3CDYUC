@@ -14,7 +14,7 @@
 	#include <avr/interrupt.h>
 	
 	
-	#define BUFFER_LENGTH 6			//Tamaño del buffer para 5 caracteres + '\0'
+	#define RX_BUFFER_LENGTH 6			//Tamaño del buffer para 5 caracteres + '\0'
 	
 	// -------- Prototipos de funciones Publicas ---------------
 	
