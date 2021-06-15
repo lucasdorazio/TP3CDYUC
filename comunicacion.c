@@ -6,9 +6,11 @@
  */ 
 #include "Comunicacion.h"
 
-extern volatile int comando_invalido;
-extern char RX_Buffer[6];				
-extern char TX_Buffer[117];
+extern volatile uint8_t comando_invalido;	//DECLARADA EN main.c
+//Bufferes de comunicación entre tareas
+char RX_Buffer[RX_BUFFER_LENGTH];				
+char TX_Buffer[TX_BUFFER_LENGTH];
+//Mensajes
 char msgON[] = "COMANDO ON\n\r";
 char msgOFF[] = "COMANDO OFF\n\r";
 char msgFREC[] = "COMANDO FRECUENCIA\n\r";
@@ -39,7 +41,7 @@ void Comunicacion_Enviar_mensaje(char * msg){
 	
 	do{
 		TX_Buffer[i]=msg[i];
-	}while(msg[i++]);					//CARACER FIN DE CADENA '\0' = 0x00		
+	}while(msg[i++]);					//CARACTER FIN DE CADENA '\0' = 0x00		
 	SerialPort_TX_Interrupt_Enable();
 }
 
@@ -53,20 +55,20 @@ void Comunicacion_Enviar_mensaje(char * msg){
 void Comunicacion_Recibir_comando(){
 	int  decod_index,num;
 	
-	if (strcmp(RX_Buffer,"RST") == 0)					//INGRESÓ COMANDO RST
-	{
+	if (strcmp(RX_Buffer,"RST") == 0){				
+		//INGRESÓ COMANDO RST
 		Comunicacion_Enviar_mensaje(msgMENU);
 		SIGNALGENERATOR_RST();
 	}
 	else{
-		if (strcmp(RX_Buffer,"ON") == 0)				//INGRESÓ COMANDO ON
-		{
+		if (strcmp(RX_Buffer,"ON") == 0){
+			//INGRESÓ COMANDO ON
 			Comunicacion_Enviar_mensaje(msgON);
 			SIGNALGENERATOR_ON();
 		}
 		else{
-			if (strcmp(RX_Buffer,"OFF") == 0)			//INGRESÓ COMANDO OFF
-			{
+			if (strcmp(RX_Buffer,"OFF") == 0){	
+				//INGRESÓ COMANDO OFF
 				Comunicacion_Enviar_mensaje(msgOFF);
 				SIGNALGENERATOR_OFF();
 			}
@@ -84,7 +86,8 @@ void Comunicacion_Recibir_comando(){
 				}
 				if (comando_invalido==0){
 					num=atoi(RX_Buffer);
-					if (num>=F_MIN && num<=F_MAX){		//INGRESÓ COMANDO FRECUENCIA VALIDA
+					if (num>=F_MIN && num<=F_MAX){		
+						//INGRESÓ COMANDO FRECUENCIA VALIDA
 						Comunicacion_Enviar_mensaje(msgFREC);
 						SIGNALGENERATOR_ChangeFrec(num);
 					}

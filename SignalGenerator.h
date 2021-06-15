@@ -1,3 +1,12 @@
+/*
+ * signalGenerator.h
+ *
+ * Created: 7/6/2021 17:03:03
+ *  Author: Lucas
+ */ 
+
+
+  
 #ifndef SIGNALGENERATOR_H_
 #define SIGNALGENERATOR_H_
 
@@ -5,7 +14,7 @@
 #include <stdio.h>
 #include "Timer.h"
 
-#define DEFAULT_OCR 9999 //Implica que DefaultFrec = 100 
+#define DEFAULT_OCR 9999 //Implica que DefaultFrec = 100
 
 void SIGNALGENERATOR_ChangeFrec(uint16_t NewFrec);
 void SIGNALGENERATOR_OFF();

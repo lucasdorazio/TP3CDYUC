@@ -1,9 +1,16 @@
+/*
+ * timer.c
+ *
+ * Created: 7/6/2021 17:01:47
+ *  Author: Lucas
+ */ 
+
 #include "Timer.h"
 
 /************************************************************************/
-/* Configuración inicial del timer. Activo la salida correspondiente al 
-canal A (OC1A), utilizo modo CTC con TOP= OCR1A. El parámetro recibido es 
-el valor a colocar en el registro de comparación OCR1A con el que iniciará 
+/* Configuración inicial del timer. Activo la salida correspondiente al
+canal A (OC1A), utilizo modo CTC con TOP= OCR1A. El parámetro recibido es
+el valor a colocar en el registro de comparación OCR1A con el que iniciará
 el periférico															*/
 /************************************************************************/
 void TIMER1_Init(uint16_t Initial_OCR1A){
@@ -22,7 +29,7 @@ void TIMER1_ChangeTOP(uint16_t New_OCR1A){
 }
 
 /************************************************************************/
-/* Selecciona la fuente de reloj y el preescalador utilizado. 
+/* Selecciona la fuente de reloj y el preescalador utilizado.
 Al finalizar esta función el Timer ya está funcionando					*/
 /************************************************************************/
 void TIMER1_ON(){

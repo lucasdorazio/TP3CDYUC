@@ -9,9 +9,9 @@
 /* LAS FUNCIONES DE ESTE ARCHIVO POSEEN DEPENDENCIAS CON EL HARDWARE	*/
 /************************************************************************/
 
-extern volatile int fin_comando, comando_invalido;
-extern char RX_Buffer[RX_BUFFER_LENGTH];
-extern char TX_Buffer[117];
+extern volatile uint8_t fin_comando, comando_invalido;	//DECLARAS EN main.c
+extern char RX_Buffer[RX_BUFFER_LENGTH];				//DECLARADA EN comunicacion.c
+extern char TX_Buffer[TX_BUFFER_LENGTH];				//DECLARADA EN comunicacion.c
 
 
 /************************************************************************/
@@ -56,10 +56,6 @@ void SerialPort_TX_Interrupt_Disable(void)
 	UCSR0B &=~(1<<UDRIE0);
 }
 
-void SerialPort_RX_Interrupt_Disable(void)
-{
-	UCSR0B &=~(1<<RXCIE0);
-}
 
 
 
@@ -71,15 +67,18 @@ SI PUEDE SERLO ACTIVA EL FLAG fin_comando, DE LO CONTRARIO ACTIVA comando_invali
 /************************************************************************/
 ISR(USART_RX_vect){
 	static int RX_index=0, overflow_buffer=0;
-	unsigned char dato = UDR0;				//Leer el UDR borra el flag RXC(condición de interrupción)
+	//Leer el UDR borra el flag RXC(condición de interrupción)
+	unsigned char dato = UDR0;				
 	
 	if (dato == '\r') {
-		if (overflow_buffer){				//El comando es invalido por tener más caracteres que los debidos
+		if (overflow_buffer){				
+			//El comando es invalido por tener más caracteres que los debidos
 			comando_invalido=1;				 
 			overflow_buffer=0;
 		}
 		else{
-			RX_Buffer[RX_index]='\0';		//Inserta fin de cadena al final.
+			//Inserta fin de cadena al final.
+			RX_Buffer[RX_index]='\0';		
 			fin_comando = 1;
 		}
 		RX_index=0;
